@@ -47,55 +47,95 @@
 
 ## Basics
 
-- create new database
+- Create db mydb
+
+  ```
+  > use mydb
+  switched to db mydb
+  ```
+
+- list all databases
+
+  ```
+  > show dbs
+  ```
+
+- delete database
+
+  ```
+  > db.dropDatabase("test");
+  ```
+
+- Create a collection mycollection
+
+  ```
+  > db.createCollection("mycollection")
+  { "ok" : 1 }
+  ```
+
+- view collections
+
+  ```
+  > use <db_name> // to change the database
+  > db.getCollectionName() // to get it as array
+
+  -----  or  ------
+
+  > show collections
+  ```
+
+- rename collection
+
+  ```
+  > db.<old_collection_name>.renameCollection("new_collection_name");
+  ```
+
+- drop collection
+
+  ```
+  > use <db_name>
+  > db.<collection_name>.drop()
+  ```
 
 - the bulk write
 
-```
-
-try {
-db.users.bulkWrite([
-{
-insertOne: {
-document: <document_1>
-}
-},
-{
-insertOne: {
-document: <document_2>
-}
-},
-{
-insertOne: {
-document: <document_3>
-}
-},
-{
-updateOne: {
-filter: <filter>,
-update: { $set: <new_value> }
-}
-}
-], { ordered: true });
-} catch (err) {
-print(err);
-}
-
-```
+  ```
+  try {
+  db.<collection_name>.bulkWrite([
+  {
+  insertOne: {
+  document: <document_1>
+  }
+  },
+  {
+  insertOne: {
+  document: <document_2>
+  }
+  },
+  {
+  insertOne: {
+  document: <document_3>
+  }
+  },
+  {
+  updateOne: {
+  filter: <filter>,
+  update: { $set: <new_value> }
+  }
+  }
+  ], { ordered: true });
+  } catch (err) {
+  print(err);
+  }
+  ```
 
 - Import dataset into mongodb
 
-```
-
-mongo_db % mongoimport --uri="mongodb://localhost:27017" \
- --db=movies \
- --collection=rating \
- --type=csv \
- --headerline \
- --file=./archive/ratings.csv
-
-```
-
-```
-
-```
+  ```
+  mongo_db % mongoimport --uri="mongodb://localhost:27017" \
+  --db=movies \
+  --collection=rating \
+  --type=csv \
+  --headerline \
+  --file=./archive/ratings.csv
+  ```
