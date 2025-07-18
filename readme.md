@@ -57,23 +57,23 @@ try {
 db.users.bulkWrite([
 {
 insertOne: {
-document: { name: "Babiyon Clement", age: 23, aim: "CTO" }
+document: <document_1>
 }
 },
 {
 insertOne: {
-document: { name: "Aravind Subramanian", age: 22, aim: "COO" }
+document: <document_2>
 }
 },
 {
 insertOne: {
-document: { name: "Gokul", age: 23, aim: "CEO" }
+document: <document_3>
 }
 },
 {
 updateOne: {
-filter: { name: "Babiyon Clement" },
-update: { $set: { aim: "CTO of the big organisation" } }
+filter: <filter>,
+update: { $set: <new_value> }
 }
 }
 ], { ordered: true });
