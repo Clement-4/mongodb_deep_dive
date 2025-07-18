@@ -47,55 +47,65 @@
 
 ## Basics
 
-- Create db mydb
+- **Database commands :**
 
-  ```
-  > use mydb
-  switched to db mydb
-  ```
+  - Create db mydb
 
-- list all databases
+    ```
+    > use mydb
+    switched to db mydb
+    ```
 
-  ```
-  > show dbs
-  ```
+  - list all databases
 
-- delete database
+    ```
+    > show dbs
+    ```
 
-  ```
-  > db.dropDatabase("test");
-  ```
+  - delete database
 
-- Create a collection mycollection
+    ```
+    > db.dropDatabase("test");
+    ```
 
-  ```
-  > db.createCollection("mycollection")
-  { "ok" : 1 }
-  ```
+- **Collection commands :**
 
-- view collections
+  - Create a collection mycollection
 
-  ```
-  > use <db_name> // to change the database
-  > db.getCollectionName() // to get it as array
+    ```
+    > db.createCollection("mycollection")
+    { "ok" : 1 }
+    ```
 
-  -----  or  ------
+  - view collections
 
-  > show collections
-  ```
+    ```
+    > use <db_name> // to change the database
+    > db.getCollectionNames() // to get it as array
 
-- rename collection
+    -----  or  ------
 
-  ```
-  > db.<old_collection_name>.renameCollection("new_collection_name");
-  ```
+    > show collections
+    ```
 
-- drop collection
+  - rename collection
 
-  ```
-  > use <db_name>
-  > db.<collection_name>.drop()
-  ```
+    ```
+    > db.<old_collection_name>.renameCollection("new_collection_name");
+    ```
+
+  - drop collection
+
+    ```
+    > use <db_name>
+    > db.<collection_name>.drop()
+    ```
+
+  - to get the stats about the collection
+
+    ```
+    db.<collection_name>.stats()
+    ```
 
 - the bulk write
 
@@ -129,6 +139,10 @@
   }
   ```
 
+- Project only the required fields
+  ```
+  >db.<collection_name>.find(<filter>).projection(<projection list>); // eg: projection({item:1}) => only item and _id will be added to the final results
+  ```
 - Import dataset into mongodb
 
   ```
