@@ -143,6 +143,41 @@
       db.collection.find({}) // empty filter is like select * from table_name;
       ```
 
+- **Index** Operations:
+
+  - By default, \_id will be index, if you want to create some other fields as an index, use the following commands
+
+  - Create index
+
+    ```
+    db.collection.createIndex( <key and index type specification>, <options> )
+    ```
+
+  - List indexes
+
+    ```
+    db.collection.getIndexes()
+    ```
+
+  - Drop indexes
+
+    - Single index
+
+      ```
+      db.<collection>.dropIndex("<indexName>")
+      ```
+
+    - Multiple index
+      ```
+      db.<collection>.dropIndexes( [ "<index1>", "<index2>", "<index3>" ] )
+      ```
+
+  - To know the usages of the index -> to remove the unwanted indexes
+
+    ```
+    db.<collection>.aggregate( [ { $indexStats: { } } ] )
+    ```
+
 - the bulk write
 
   ```
