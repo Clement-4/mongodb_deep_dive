@@ -4,23 +4,26 @@
 
 - Querying from database
 
-  - Adhoc queries. Explore your MongoDB data with mongosh, Compass , VSCode or a MongoDB driver.
+  - Adhoc queries. Explore your MongoDB data with `mongosh, Compass , VSCode or a MongoDB driver`.
 
-  - Data transformations. Use aggregation pipelines to reshape your data and perform calculations.
+  - Data transformations. Use `aggregation pipelines` ( like subqueries in relational database ) to reshape your data and perform calculations.
 
-  - Document join support Use $lookup and $unionWith to combine data from different collections.
+  - Document `join` support Use `$lookup and $unionWith` to combine data from different collections.
 
-  - Graph and geospatial queries. Use operators such as $geoWithin and $geoNear to analyze geospatial data and $graphLookup for graph data.
+  - Graph and `geo spatial queries`. Use operators such as `$geoWithin and $geoNear` to analyze geo spatial data and $graphLookup for graph data.
 
-  - Full-text search. Use the $search stage to perform efficient text search on your data.
+  - `Full-text search` Use the `$search` stage to perform efficient text search on your data.
 
-  - Semantic search. Use the $vectorSearch stage to perform semantic search on your data.
+  - `Semantic search` Use the `$vectorSearch` stage to perform semantic search on your data.
 
-  - Indexing. Improve your MongoDB query performance by using the correct index type for your data architecture.
+  - `Indexing` **Improve your MongoDB query** performance by using the **correct index type** for your data architecture.
 
   - On-demand materialized views. Use $out and $merge to create materialized views on common queries.
 
   - Time series analysis. Query and aggregate your time-stamped data with time series collections.
+
+- **General Structure:**
+  - `database` -> `collection` ( like table in relational database ) -> `document` ( like row in relational database )
 
 ## Getting started
 
@@ -65,12 +68,13 @@
   - delete database
 
     ```
+    > use db_name //INFO: first get into the database -> then delete it
     > db.dropDatabase("test");
     ```
 
 - **Collection commands :**
 
-  - Create a collection mycollection
+  - Create a collection `mycollection`
 
     ```
     > db.createCollection("mycollection")
@@ -107,33 +111,65 @@
     db.<collection_name>.stats()
     ```
 
+- **Basic CRUD operation :**
+
+  - Create ( aka insert )
+
+    - insert one document:
+      ```
+      db.collection.insertOne(
+        <document>,{writeConcern:<document>})
+      ```
+    - insert many:
+      ```
+      db.collection.insertMany(
+          [ <document 1> , <document 2>, ... ],
+          {
+              writeConcern: <document>,
+              ordered: <boolean>
+          }
+      )
+      ```
+    - Other operations :
+      - findOneAndUpdate()
+      - findOneAndReplace()
+      - findAndModify()
+
+  - Read ( aka find)
+
+    - find:
+
+      ```
+      db.collection.find({}) // empty filter is like select * from table_name;
+      ```
+
 - the bulk write
 
   ```
   try {
-  db.<collection_name>.bulkWrite([
-  {
-  insertOne: {
-  document: <document_1>
-  }
-  },
-  {
-  insertOne: {
-  document: <document_2>
-  }
-  },
-  {
-  insertOne: {
-  document: <document_3>
-  }
-  },
-  {
-  updateOne: {
-  filter: <filter>,
-  update: { $set: <new_value> }
-  }
-  }
-  ], { ordered: true });
+    db.<collection_name>.bulkWrite([
+      {
+      insertOne: {
+      document: <document_1>
+      }
+      },
+      {
+      insertOne: {
+      document: <document_2>
+      }
+      },
+      {
+      insertOne: {
+      document: <document_3>
+      }
+      },
+      {
+      updateOne: {
+      filter: <filter>,
+      update: { $set: <new_value> }
+      }
+      }
+      ], { ordered: true });
   } catch (err) {
   print(err);
   }
